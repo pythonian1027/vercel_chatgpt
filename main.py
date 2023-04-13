@@ -6,12 +6,24 @@ Created on Wed Apr 12 19:06:49 2023
 @author: paco
 """
 
-import os
-import openai
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
 
-def ask_question(prompt):
+import json
+from chatgpt import ask_question
+
+def handler(event, context):
+    body = json.loads(event["body"])
+    question = body["question"]
+    answer = ask_question(question)
+    response = {"answer": answer}
+    return {"statusCode": 200, "body": json.dumps(response)}
+
+# import os
+# import openai
+
+# openai.api_key = os.environ["OPENAI_API_KEY"]
+
+# def ask_question(prompt):
     # Your code here
 
 
