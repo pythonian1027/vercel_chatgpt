@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatGPT Demo</title>
+  </head>
+  <body>
+    <h1>ChatGPT Demo</h1>
+    <p>Type a question below:</p>
+    <input type="text" id="question" name="question"><br><br>
+    <button type="button" onclick="ask()">Ask</button>
+    <p id="answer"></p>
+
+    <script>
+      async function ask() {
+        // Get the question from the input field
+        let question = document.getElementById("question").value;
+
+        // Send a POST request to the /ask endpoint with the question prompt
+        let response = await fetch("/api/ask", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ "prompt": question })
+        });
+
+        // Parse the response JSON to get the answer text
+        let data = await response.json();
+        let answer = data.answer;
+
+        // Display the answer text in the answer paragraph
+        let answerElement = document.getElementById("answer");
+        answerElement.innerText = answer;
+      }
+    </script>
+  </body>
+</html>

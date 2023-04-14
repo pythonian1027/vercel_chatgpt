@@ -1,8 +1,20 @@
 {
   "version": 2,
-  "builds": [{ "src": "main.py", "use": "@vercel/python" }],
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
   "routes": [
-    { "src": "/api/ask", "methods": ["POST"], "dest": "/api/ask.py"},
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    {
+      "src": "/api/ask",
+      "dest": "api/ask.py"
+    },
+    {
+      "src": "/ask",
+      "dest": "index.html"
+    }
+  ],
+  "output": "public"
 }
