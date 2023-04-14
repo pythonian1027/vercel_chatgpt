@@ -7,6 +7,10 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 # Define the OpenAI API endpoint
 model_engine = "text-davinci-002"
 
+# Define the OpenAI API endpoint
+endpoint = "https://api.openai.com/v1/engines/davinci-codex/completions"
+
+
 def get_chat_response(prompt):
     # Define the parameters for the GPT-3 request
     params = {
