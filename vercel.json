@@ -1,13 +1,7 @@
 {
-  "builds": [
-    {
-      "src": "main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    { "src": "/ask", "dest": "/api/ask.py" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { 
+	"source": "/(.*)", "destination": "index" 
+	}
   ]
 }
-
