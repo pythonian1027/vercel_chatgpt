@@ -1,6 +1,7 @@
 import openai
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+import os
 
 app = FastAPI()
 
@@ -9,7 +10,7 @@ class QuestionPrompt(BaseModel):
     prompt: str
 
 # Load OpenAI API key from an environment variable
-openai.api_key = "YOUR_OPENAI_API_KEY"
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # Define the OpenAI API endpoint
 endpoint = "https://api.openai.com/v1/engines/davinci-codex/completions"
@@ -37,4 +38,3 @@ async def ask(request: Request, question_prompt: QuestionPrompt):
 
     # Return the answer in a JSON response
     return {"answer": answer}
-

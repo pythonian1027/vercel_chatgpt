@@ -2,10 +2,7 @@
   "version": 2,
   "builds": [{ "src": "main.py", "use": "@vercel/python" }],
   "routes": [
-    { "src": "/ask", "methods": ["POST"], "dest": "main.handler" },
+    { "src": "/api/ask", "methods": ["POST"], "dest": "/api/ask.py"},
     { "src": "/(.*)", "dest": "/index.html" }
-  ],
-  "env": {
-    "OPENAI_API_KEY": "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"
-  }
+  ]
 }
