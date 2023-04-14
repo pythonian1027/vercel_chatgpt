@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ChatGPT Demo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT Example</title>
   </head>
   <body>
-    <h1>ChatGPT Demo</h1>
-    <p>Type a question below:</p>
-    <input type="text" id="question" name="question"><br><br>
-    <button type="button" onclick="ask()">Ask</button>
-    <p id="answer"></p>
+    <h1>ChatGPT Example</h1>
+    <form id="chat-form">
+      <label for="chat-input">Ask a question:</label>
+      <input type="text" id="chat-input" name="chat-input" /><br /><br />
+      <button type="submit" id="chat-submit">Submit</button>
+    </form>
+
+    <div id="chat-output"></div>
 
     <script>
-      async function ask() {
-        // Get the question from the input field
-        let question = document.getElementById("question").value;
+      const form = document.querySelector("#chat-form");
+      const input = document.querySelector("#chat-input");
+      const output = document.querySelector("#chat-output");
 
-        // Send a POST request to the /ask endpoint with the question prompt
-        let response = await fetch("/api/ask", {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const prompt = input.value;
+        input.value = "";
+        const response = await fetch("/api/ask", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ "prompt": question })
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt }),
         });
-
-        // Parse the response JSON to get the answer text
-        let data = await response.json();
-        let answer = data.answer;
-
-        // Display the answer text in the answer paragraph
-        let answerElement = document.getElementById("answer");
-        answerElement.innerText = answer;
-      }
+        const { answer } = await response.json();
+        output.innerHTML += `<p><strong>You:</strong> ${prompt}</p><p><strong>ChatGPT:</strong> ${answer}</p>`;
+      });
     </script>
   </body>
 </html>

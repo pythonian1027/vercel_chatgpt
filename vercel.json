@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "main.py",
@@ -7,14 +6,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/ask",
-      "dest": "api/ask.py"
-    },
-    {
-      "src": "/ask",
-      "dest": "index.html"
-    }
-  ],
-  "output": "public"
+    { "src": "/ask", "dest": "/api/ask.py" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }

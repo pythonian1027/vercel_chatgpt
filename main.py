@@ -1,18 +1,12 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 12 19:06:49 2023
-
-@author: paco
-"""
 from fastapi import FastAPI
-from starlette.responses import FileResponse
+from api import ask
 
 app = FastAPI()
 
-@app.get("/")
-async def index():
-    return FileResponse("index.html")
+@app.post("/ask")
+async def ask_question(prompt: str):
+    response = ask(prompt)
+    return response
 
 
 
